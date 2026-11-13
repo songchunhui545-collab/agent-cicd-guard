@@ -1,0 +1,48 @@
+# Intentionally vulnerable example modeled on a public issue-labeler pattern.
+# Do not use this workflow. It exists so the scanner has something to flag.
+name: Issue labeler (vulnerable example)
+
+on:
+  issues:
+    types:
+      - opened
+      - labeled
+
+# No top-level permissions: block — inherits the repo default.
+
+jobs:
+  gather-labels:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+      packages: write
+      issues: write
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    steps:
+      - name: Run Codex labeler
+        id: codex
+        uses: openai/codex-action@v1
+        with:
+          openai-api-key: ${{ secrets.CODEX_OPENAI_API_KEY }}
+          allow-users: "*"
+          sandbox: workspace-write
+          prompt: |
+            You are labeling GitHub issues.
+
+            Issue title:
+            ${{ github.event.issue.title }}
+
+            Issue body:
+            ${{ github.event.issue.body }}
+
+      - name: Echo issue body in the shell
+        run: |
+          echo "Processing issue: ${{ github.event.issue.title }}"
+          echo "${{ github.event.issue.body }}"
+
+      - name: Publish package
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

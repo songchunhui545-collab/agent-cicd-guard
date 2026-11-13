@@ -1,0 +1,55 @@
+# Sample workflow: run agent-cicd-guard against this repository's Actions.
+# Pin action SHAs when you copy this into your own repo, and prefer
+# installing a released version once you publish one.
+name: Agent CI/CD Guard
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/**"
+      - "src/**"
+      - "tests/**"
+      - "pyproject.toml"
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: "3.12"
+
+      - name: Install agent-cicd-guard
+        run: python -m pip install --upgrade pip && python -m pip install -e ".[dev]"
+
+      - name: Run tests
+        run: pytest
+
+      - name: Scan workflows
+        run: |
+          mkdir -p reports
+          agent-cicd-guard scan . --format text
+          agent-cicd-guard scan . --format sarif -o reports/agent-cicd-guard.sarif --fail-on never
+
+      - name: Upload SARIF
+        if: always() && github.event_name != 'pull_request' || true
+        uses: github/codeql-action/upload-sarif@ce28f5bb42b7a9f2c824e633a3f6ee835bab6858 # v3.29.0
+        continue-on-error: true
+        with:
+          sarif_file: reports/agent-cicd-guard.sarif
+
+      # This workflow is itself scanned by agent-cicd-guard; keep it
+      # least-privilege and SHA-pinned so the scan stays clean.

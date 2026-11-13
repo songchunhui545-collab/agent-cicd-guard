@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-cicd-guard"
+version = "0.1.0"
+description = "Security checklist and scanner for AI agents wired into CI/CD (GitHub Actions)."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.9"
+authors = [
+  { name = "agent-cicd-guard contributors" },
+]
+keywords = ["github-actions", "security", "ci-cd", "llm", "agent", "sast"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Topic :: Security",
+]
+dependencies = [
+  "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+agent-cicd-guard = "agent_cicd_guard.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/<your-username>/agent-cicd-guard"
+Issues = "https://github.com/<your-username>/agent-cicd-guard/issues"
+Documentation = "https://github.com/<your-username>/agent-cicd-guard#readme"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

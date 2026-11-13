@@ -1,0 +1,35 @@
+# pull_request_target plus script injection and an unpinned agent action.
+name: PR triage (vulnerable example)
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, labeled]
+  issue_comment:
+    types: [created]
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    # No permissions: block on the job either.
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Claude review
+        uses: anthropics/claude-code-action@main
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        with:
+          dangerously-skip-permissions: true
+          prompt: |
+            Review this pull request.
+            Title: ${{ github.event.pull_request.title }}
+            Body: ${{ github.event.pull_request.body }}
+            Comment: ${{ github.event.comment.body }}
+
+      - name: Comment back
+        run: gh pr comment ${{ github.event.pull_request.number }} --body "${{ github.event.comment.body }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
