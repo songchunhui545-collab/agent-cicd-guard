@@ -32,9 +32,9 @@ dev = ["pytest>=7.0"]
 agent-cicd-guard = "agent_cicd_guard.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/<your-username>/agent-cicd-guard"
-Issues = "https://github.com/<your-username>/agent-cicd-guard/issues"
-Documentation = "https://github.com/<your-username>/agent-cicd-guard#readme"
+Homepage = "https://github.com/songchunhui545-collab/agent-cicd-guard"
+Issues = "https://github.com/songchunhui545-collab/agent-cicd-guard/issues"
+Documentation = "https://github.com/songchunhui545-collab/agent-cicd-guard#readme"
 
 [tool.setuptools.packages.find]
 where = ["src"]

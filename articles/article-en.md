@@ -80,7 +80,7 @@ Reading YAML by hand works until it does not. **agent-cicd-guard** is a Python C
 
 The placeholder repository URL is:
 
-https://github.com/<your-username>/agent-cicd-guard
+https://github.com/songchunhui545-collab/agent-cicd-guard
 
 Locally:
 

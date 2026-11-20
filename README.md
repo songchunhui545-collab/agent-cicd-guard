@@ -11,7 +11,7 @@ This project turns that class of mistake into:
 
 It is a defensive tool. It does not exploit workflows, and it does not ship proof-of-concept payloads.
 
-Repository (placeholder): <https://github.com/<your-username>/agent-cicd-guard>
+Repository (placeholder): <https://github.com/songchunhui545-collab/agent-cicd-guard>
 
 中文说明见 [README.zh-CN.md](README.zh-CN.md)。完整清单见 [CHECKLIST.md](CHECKLIST.md) / [CHECKLIST.zh-CN.md](CHECKLIST.zh-CN.md)。
 

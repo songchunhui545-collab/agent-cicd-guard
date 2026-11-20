@@ -80,7 +80,7 @@ Runner 上还有工作流进程、缓存、令牌。Depi 描述了从沙箱里�
 
 仓库在这里（占位地址，发布前换成你的账号）：
 
-https://github.com/<your-username>/agent-cicd-guard
+https://github.com/songchunhui545-collab/agent-cicd-guard
 
 本地用法：
 

@@ -11,7 +11,7 @@
 
 这是防御向工具，不包含利用代码，也不提供攻击演示。
 
-仓库地址（占位）：<https://github.com/<your-username>/agent-cicd-guard>
+仓库地址（占位）：<https://github.com/songchunhui545-collab/agent-cicd-guard>
 
 English README: [README.md](README.md)。完整清单见 [CHECKLIST.zh-CN.md](CHECKLIST.zh-CN.md) / [CHECKLIST.md](CHECKLIST.md)。
 

@@ -15,7 +15,7 @@ SARIF_LEVEL = {
     "info": "note",
 }
 
-HELP_URI = "https://github.com/<your-username>/agent-cicd-guard"
+HELP_URI = "https://github.com/songchunhui545-collab/agent-cicd-guard"
 
 
 def render_sarif(workflows: list[Workflow], findings: list[Finding]) -> str:
