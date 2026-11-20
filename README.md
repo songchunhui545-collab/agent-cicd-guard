@@ -11,9 +11,15 @@ This project turns that class of mistake into:
 
 It is a defensive tool. It does not exploit workflows, and it does not ship proof-of-concept payloads.
 
-Repository (placeholder): <https://github.com/songchunhui545-collab/agent-cicd-guard>
+Repository: <https://github.com/songchunhui545-collab/agent-cicd-guard>
 
 中文说明见 [README.zh-CN.md](README.zh-CN.md)。完整清单见 [CHECKLIST.md](CHECKLIST.md) / [CHECKLIST.zh-CN.md](CHECKLIST.zh-CN.md)。
+
+## Demo
+
+Scan of the bundled anti-pattern example ([`examples/vulnerable-issue-labeler.yml`](examples/vulnerable-issue-labeler.yml)):
+
+![agent-cicd-guard scan output](docs/demo.png)
 
 ## Quick start
 

@@ -11,9 +11,15 @@
 
 这是防御向工具，不包含利用代码，也不提供攻击演示。
 
-仓库地址（占位）：<https://github.com/songchunhui545-collab/agent-cicd-guard>
+仓库地址：<https://github.com/songchunhui545-collab/agent-cicd-guard>
 
 English README: [README.md](README.md)。完整清单见 [CHECKLIST.zh-CN.md](CHECKLIST.zh-CN.md) / [CHECKLIST.md](CHECKLIST.md)。
+
+## 演示
+
+扫描仓库自带的反面示例（[`examples/vulnerable-issue-labeler.yml`](examples/vulnerable-issue-labeler.yml)）：
+
+![agent-cicd-guard 扫描输出](docs/demo.png)
 
 ## 快速开始
 
