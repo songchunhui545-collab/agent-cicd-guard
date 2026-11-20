@@ -95,6 +95,22 @@ ACG-000 留给无法解析的 YAML（按 high 处理，让 CI 选择失败关闭
 - [articles/article-zh.md](articles/article-zh.md)
 - [articles/article-en.md](articles/article-en.md)
 
+## 公开工作流匿名抽样参考
+
+2026 年 11 月 20 日，我们用 `agent-cicd-guard v0.1.0` 在本地只读扫描了 **12 个公开 GitHub Actions 工作流**（来自不同组织，分别引用 `anthropics/claude-code-action`、`openai/codex-action` 和 `google-github-actions/run-gemini-cli` 各 4 个）。不披露具体仓库名，也未提交任何 issue 或 PR。
+
+- **命中情况**：12 / 12 个工作流均有发现，共 97 条（55 high、33 medium、9 low）
+- **最高频规则**：
+  - `ACG-007`（action 未钉到 40 位 SHA）：23 条，覆盖 10 / 12 个工作流
+  - `ACG-004`（过宽写权限）：13 条，覆盖 10 / 12 个工作流
+  - `ACG-013`（缺少明显审计产物）：9 / 12 个工作流
+  - `ACG-002`（外部可触发的高权限事件）：8 / 12 个工作流
+  - `ACG-009`（工具白名单过宽）与 `ACG-012`（缺少出站网络限制）：各 8 / 12 个工作流
+  - `ACG-005`（高价值密钥/令牌对 Agent 可见）：6 / 12 个工作流
+  - `ACG-001`（不受信任的 issue 标题/正文进入 prompt）：3 / 12 个工作流
+
+*说明*：这是小样本便利抽样，不能外推到所有公开仓库。静态规则偏保守（例如标出 `id-token: write` 或 `GITHUB_TOKEN` 可见并不代表存在直接可利用漏洞或发布权限泄露）。
+
 ## 局限
 
 - 这是对 workflow YAML 的静态分析，不能证明一个 workflow 是安全的；它认不出的 Agent 调用方式也会漏报。

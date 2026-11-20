@@ -95,6 +95,22 @@ Background articles (incident, attack chain at a high level, how to use the tool
 - [articles/article-en.md](articles/article-en.md)
 - [articles/article-zh.md](articles/article-zh.md)
 
+## Anonymized Public Workflow Sample
+
+On 2026-11-20, we ran `agent-cicd-guard v0.1.0` (read-only, locally) against a convenience sample of **12 public GitHub Actions workflows** from distinct organizations referencing `anthropics/claude-code-action`, `openai/codex-action`, or `google-github-actions/run-gemini-cli` (4 each). No repository names are disclosed, and no issues or PRs were opened.
+
+- **Workflows with findings:** 12 / 12 (97 total findings: 55 high, 33 medium, 9 low)
+- **Most frequent rules:**
+  - `ACG-007` (action not pinned to commit SHA): 23 findings across 10 / 12 workflows
+  - `ACG-004` (broad write permissions): 13 findings across 10 / 12 workflows
+  - `ACG-013` (no obvious audit artifact): 9 / 12 workflows
+  - `ACG-002` (untrusted external triggers): 8 / 12 workflows
+  - `ACG-009` (broad/missing tool allowlist) & `ACG-012` (no egress control): 8 / 12 workflows each
+  - `ACG-005` (high-value token visible to agent step): 6 / 12 workflows
+  - `ACG-001` (untrusted issue title/body interpolated into prompt): 3 / 12 workflows
+
+*Caveat:* This is a small convenience sample, not a census. Static rules are intentionally conservative (for example, flagging `id-token: write` or `GITHUB_TOKEN` visibility does not by itself prove exploitability or npm publish access).
+
 ## Limitations
 
 - This is static analysis of workflow YAML. It cannot prove a workflow is safe, and it will miss agents invoked in ways it does not recognize.
